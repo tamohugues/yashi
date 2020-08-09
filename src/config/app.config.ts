@@ -1,10 +1,10 @@
 export default () => ({
   PORT: parseInt(process.env.PORT, 10) || 3000,
   FTP: {
-    HOST: 'localhost',
+    HOST: 'ftp.clickfuel.com',
     PORT: 21,
-    USER: 'anonymous',
-    PASSWORD: 'anonymous@',
+    USER: 'ftp_integration_test',
+    PASSWORD: '6k0Sb#EXT6jw',
   },
   DB: {
     DIALECT: 'mysql',

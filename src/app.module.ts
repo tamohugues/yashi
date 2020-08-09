@@ -3,8 +3,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AppController } from './app.controller';
-import configuration from './config/app.config';
+import { BulkUploadModule } from './modules/bulk-upload/bulkupload.module';
 import { TimeoutInterceptor } from './commont/timeout.interceptor';
+import configuration from './config/app.config';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { TimeoutInterceptor } from './commont/timeout.interceptor';
       }),
       inject: [ConfigService],
     }),
+    BulkUploadModule,
   ],
   controllers: [AppController],
   providers: [
