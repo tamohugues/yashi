@@ -13,7 +13,7 @@ export default () => ({
     USERNAME: 'root',
     PASSWORD: 'Hugues8688',
     DATABASE: 'yashi_db',
-    AUTOLOADMODELS: true,
+    AUTOLOADMODELS: false,
     SYNCHRONIZE: true,
   },
 });
