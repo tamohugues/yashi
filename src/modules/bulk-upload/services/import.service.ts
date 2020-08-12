@@ -3,6 +3,8 @@ import { ConfigService } from '@nestjs/config';
 import { toClass } from 'class-converter';
 import { FileBaseDataDto, AdvertiserDto } from '../dtos';
 import { CampaignService } from './campaign.service';
+import { OrderService } from './order.service';
+import { CreativeService } from './creative.service';
 import * as Client from 'ftp';
 import * as CSVtoJson from 'csvtojson';
 import * as moment from 'moment';
@@ -12,7 +14,12 @@ export class ImportService {
   private client: Client;
   private regexFileName: RegExp;
 
-  constructor(private readonly configService: ConfigService, private readonly campaignService: CampaignService) {
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly campaignService: CampaignService,
+    private readonly orderService: OrderService,
+    private readonly creativeService: CreativeService,
+  ) {
     this.regexFileName = new RegExp(/Yashi_\d{4}-05-\d{2}\.csv/, 'g');
   }
 
@@ -31,6 +38,10 @@ export class ImportService {
       for (let y = 0; y < fileBaseDatas.length; y++) {
         await this.campaignService.findOrCreateCampaign(fileBaseDatas[y]);
         await this.campaignService.findOrCreateCampaignData(fileBaseDatas[y]);
+        await this.orderService.findOrCreateOrder(fileBaseDatas[y]);
+        await this.orderService.findOrCreateOrderData(fileBaseDatas[y]);
+        await this.creativeService.findOrCreateCreative(fileBaseDatas[y]);
+        await this.creativeService.findOrCreateCreativeData(fileBaseDatas[y]);
       }
     }
   }

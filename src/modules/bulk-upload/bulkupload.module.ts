@@ -7,6 +7,6 @@ import { Campaign, CampaignData, Creative, CreativeData, Order, OrderData } from
 @Module({
   imports: [SequelizeModule.forFeature([Campaign, CampaignData, Creative, CreativeData, Order, OrderData])],
   controllers: [BulkUploadController],
-  providers: [CampaignService, CreativeService, ImportService, OrderService],
+  providers: [OrderService, CampaignService, CreativeService, ImportService],
 })
 export class BulkUploadModule {}

@@ -50,6 +50,6 @@ export class Creative extends Model<Creative> {
   @BelongsTo(() => Order, 'order_id')
   order: Order;
 
-  @HasMany(() => CreativeData, 'campaign_id')
+  @HasMany(() => CreativeData, 'creative_id')
   creativeDatas: CreativeData[];
 }

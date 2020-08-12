@@ -52,7 +52,7 @@ export class CampaignService {
     });
   }
 
-  private findOneCampaign(yashiCampaignId: number, yashiAdvertiserId: number): Promise<Campaign> {
+  public findOneCampaign(yashiCampaignId: number, yashiAdvertiserId: number): Promise<Campaign> {
     return this.campaignModel.findOne({
       where: {
         yashiCampaignId,
