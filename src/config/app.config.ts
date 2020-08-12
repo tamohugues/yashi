@@ -11,7 +11,7 @@ export default () => ({
     HOST: 'localhost',
     PORT: 3306,
     USERNAME: 'root',
-    PASSWORD: 'Hugues8688',
+    PASSWORD: 'password',
     DATABASE: 'yashi_db',
     AUTOLOADMODELS: true,
     SYNCHRONIZE: true,
