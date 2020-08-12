@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { TransformationService } from './transformation.service';
 import { toClass } from 'class-converter';
 import { FileBaseDataDto, AdvertiserDto } from '../dtos';
+import { CampaignService } from './campaign.service';
 import * as Client from 'ftp';
 import * as CSVtoJson from 'csvtojson';
 import * as moment from 'moment';
@@ -12,33 +12,59 @@ export class ImportService {
   private client: Client;
   private regexFileName: RegExp;
 
-  constructor(
-    private readonly configService: ConfigService,
-    private readonly transformationService: TransformationService,
-  ) {
+  constructor(private readonly configService: ConfigService, private readonly campaignService: CampaignService) {
     this.regexFileName = new RegExp(/Yashi_\d{4}-05-\d{2}\.csv/, 'g');
   }
 
-  importFiles() {
-    this.connect();
-    this.client.on('ready', () => {
-      this.client.list(async (err, list) => {
-        if (err) {
+  /**
+   * import all data form file to mysql database
+   *
+   * @memberof ImportService
+   */
+  async importFiles() {
+    const fileNames: string[] = await this.getFileNames();
+    const advertisers: AdvertiserDto[] = await this.getAdvertisers();
+
+    for (let i = 0; i < fileNames.length; i++) {
+      const fileBaseDatas: FileBaseDataDto[] = await this.getFileDatas(fileNames[i], advertisers);
+
+      for (let y = 0; y < fileBaseDatas.length; y++) {
+        await this.campaignService.findOrCreateCampaign(fileBaseDatas[y]);
+        await this.campaignService.findOrCreateCampaignData(fileBaseDatas[y]);
+      }
+    }
+  }
+
+  /**
+   * get all file name from ftp filter by regex
+   *
+   * @private
+   * @returns {Promise<string[]>}
+   * @memberof ImportService
+   */
+  private getFileNames(): Promise<string[]> {
+    return new Promise((resolve, reject) => {
+      this.connect();
+      this.client.on('ready', () => {
+        this.client.list(async (err, list) => {
+          if (err) {
+            this.client.destroy();
+            reject(err);
+          }
+          const fileNames: string[] = list.filter((x) => this.regexFileName.test(x.name)).map((x) => x.name);
           this.client.destroy();
-          throw err;
-        }
-        const fileNames: string[] = list.filter((x) => this.regexFileName.test(x.name)).map((x) => x.name);
-        this.client.destroy();
-
-        const advertisers = await this.getAdvertisers();
-
-        const fileBaseDatas = await this.getFileDatas(fileNames[0], advertisers);
-
-        console.log(fileBaseDatas);
+          resolve(fileNames);
+        });
       });
     });
   }
 
+  /**
+   * connect to ftp
+   *
+   * @private
+   * @memberof ImportService
+   */
   private connect() {
     this.client = new Client();
     this.client.connect({
@@ -52,6 +78,7 @@ export class ImportService {
   /**
    * get all advertisers data from ftp file
    *
+   * @private
    * @returns {Promise<AdvertiserDto[]>}
    * @memberof ImportService
    */
@@ -87,6 +114,7 @@ export class ImportService {
   /**
    * get all file data from ftp filter by advertiser id
    *
+   * @private
    * @param {string} fileName
    * @param {AdvertiserDto[]} advertisers
    * @returns {Promise<FileBaseDataDto[]>}

@@ -15,7 +15,9 @@ export class BulkUploadController {
     description: 'The record has been successfully imported.',
   })
   BulkUpload(): boolean {
-    this.importService.importFiles();
+    (async () => {
+      await this.importService.importFiles();
+    })();
     return true;
   }
 }

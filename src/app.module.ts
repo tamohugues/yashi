@@ -24,6 +24,9 @@ import configuration from './config/app.config';
         database: configService.get('DB.DATABASE'),
         autoLoadModels: configService.get('DB.AUTOLOADMODELS'),
         synchronize: configService.get('DB.SYNCHRONIZE'),
+        define: {
+          timestamps: configService.get('DB.TIMESTAMPS'),
+        },
       }),
       inject: [ConfigService],
     }),

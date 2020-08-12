@@ -41,7 +41,7 @@ export class Campaign extends Model<Campaign> {
     allowNull: true,
     defaultValue: null,
     type: DataType.STRING,
-    field: 'yashi_advertiser_id',
+    field: 'advertiser_name',
   })
   advertiserName: string;
 
