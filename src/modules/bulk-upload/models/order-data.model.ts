@@ -9,7 +9,7 @@ export class OrderData extends BaseData<OrderData> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER({ length: 11 }).UNSIGNED,
     unique: 'order_id',
     field: 'order_id',
   })
@@ -18,7 +18,7 @@ export class OrderData extends BaseData<OrderData> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER,
+    type: DataType.INTEGER({ length: 11 }),
     unique: 'order_id',
     field: 'log_date',
   })

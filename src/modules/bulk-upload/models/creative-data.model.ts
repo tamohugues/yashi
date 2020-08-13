@@ -9,7 +9,7 @@ export class CreativeData extends BaseData<CreativeData> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER({ length: 11 }).UNSIGNED,
     unique: 'creative_id_UNIQUE',
     field: 'creative_id',
   })
@@ -18,7 +18,7 @@ export class CreativeData extends BaseData<CreativeData> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER,
+    type: DataType.INTEGER({ length: 11 }),
     unique: 'creative_id_UNIQUE',
     field: 'log_date',
   })

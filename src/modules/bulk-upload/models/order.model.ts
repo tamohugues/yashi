@@ -9,7 +9,7 @@ export class Order extends Model<Order> {
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER({ length: 11 }).UNSIGNED,
     field: 'order_id',
   })
   id: number;
@@ -19,7 +19,7 @@ export class Order extends Model<Order> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER({ length: 11 }).UNSIGNED,
     field: 'campaign_id',
   })
   campaignId: number;
@@ -27,7 +27,7 @@ export class Order extends Model<Order> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER,
+    type: DataType.INTEGER({ length: 20 }),
     field: 'yashi_order_id',
   })
   yashiOrderId: number;
@@ -35,7 +35,7 @@ export class Order extends Model<Order> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.STRING,
+    type: DataType.STRING({ length: 200 }),
     field: 'name',
   })
   name: string;

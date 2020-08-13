@@ -8,7 +8,7 @@ export class Creative extends Model<Creative> {
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER({ length: 11 }).UNSIGNED,
     field: 'creative_id',
   })
   id: number;
@@ -18,7 +18,7 @@ export class Creative extends Model<Creative> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER({ length: 11 }).UNSIGNED,
     field: 'order_id',
   })
   orderId: number;
@@ -26,7 +26,7 @@ export class Creative extends Model<Creative> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER,
+    type: DataType.INTEGER({ length: 11 }),
     field: 'yashi_creative_id',
   })
   yashiCreativeId: number;
@@ -34,7 +34,7 @@ export class Creative extends Model<Creative> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.STRING,
+    type: DataType.STRING({ length: 255 }),
     field: 'name',
   })
   name: string;
@@ -42,7 +42,7 @@ export class Creative extends Model<Creative> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.STRING,
+    type: DataType.STRING({ length: 255 }),
     field: 'preview_url',
   })
   previewUrl: string;

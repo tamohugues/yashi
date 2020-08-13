@@ -8,7 +8,7 @@ export class Campaign extends Model<Campaign> {
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER({ length: 11 }).UNSIGNED,
     field: 'campaign_id',
   })
   id: number;
@@ -16,7 +16,7 @@ export class Campaign extends Model<Campaign> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER({ length: 11 }).UNSIGNED,
     field: 'yashi_campaign_id',
   })
   yashiCampaignId: number;
@@ -24,7 +24,7 @@ export class Campaign extends Model<Campaign> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.STRING,
+    type: DataType.STRING({ length: 255 }),
     field: 'name',
   })
   name: string;
@@ -32,7 +32,7 @@ export class Campaign extends Model<Campaign> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER,
+    type: DataType.INTEGER({ length: 11 }),
     field: 'yashi_advertiser_id',
   })
   yashiAdvertiserId: number;
@@ -40,7 +40,7 @@ export class Campaign extends Model<Campaign> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.STRING,
+    type: DataType.STRING({ length: 100 }),
     field: 'advertiser_name',
   })
   advertiserName: string;

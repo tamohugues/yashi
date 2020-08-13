@@ -9,7 +9,7 @@ export class CampaignData extends BaseData<CampaignData> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.INTEGER({ length: 11 }).UNSIGNED,
     unique: 'campaign_id_UNIQUE',
     field: 'campaign_id',
   })
@@ -18,7 +18,7 @@ export class CampaignData extends BaseData<CampaignData> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER,
+    type: DataType.INTEGER({ length: 11 }),
     unique: 'campaign_id_UNIQUE',
     field: 'log_date',
   })

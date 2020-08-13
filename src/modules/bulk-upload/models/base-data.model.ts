@@ -5,7 +5,7 @@ export class BaseData<T> extends Model<T> {
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
-    type: DataType.INTEGER,
+    type: DataType.INTEGER({ length: 11 }),
     field: 'id',
   })
   id: number;
@@ -13,7 +13,7 @@ export class BaseData<T> extends Model<T> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER,
+    type: DataType.INTEGER({ length: 11 }),
     field: 'impression_count',
   })
   impressionCount: number;
@@ -21,7 +21,7 @@ export class BaseData<T> extends Model<T> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER,
+    type: DataType.INTEGER({ length: 11 }),
     field: 'click_count',
   })
   clickCount: number;
@@ -29,7 +29,7 @@ export class BaseData<T> extends Model<T> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER,
+    type: DataType.INTEGER({ length: 11 }),
     field: '25viewed_count',
   })
   viewedCount25: number;
@@ -37,7 +37,7 @@ export class BaseData<T> extends Model<T> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER,
+    type: DataType.INTEGER({ length: 11 }),
     field: '50viewed_count',
   })
   viewedCount50: number;
@@ -45,7 +45,7 @@ export class BaseData<T> extends Model<T> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER,
+    type: DataType.INTEGER({ length: 11 }),
     field: '75viewed_count',
   })
   viewedCount75: number;
@@ -53,7 +53,7 @@ export class BaseData<T> extends Model<T> {
   @Column({
     allowNull: true,
     defaultValue: null,
-    type: DataType.INTEGER,
+    type: DataType.INTEGER({ length: 11 }),
     field: '100viewed_count',
   })
   viewedCount100: number;
