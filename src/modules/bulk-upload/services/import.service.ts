@@ -95,7 +95,7 @@ export class ImportService {
    */
   private getAdvertisers(): Promise<AdvertiserDto[]> {
     return new Promise((resolve, reject) => {
-      let advertisers: AdvertiserDto[] = [];
+      const advertisers: AdvertiserDto[] = [];
       this.connect();
       this.client.on('ready', () => {
         this.client.get('Yashi_Advertisers.csv', async (err, stream) => {
@@ -133,7 +133,7 @@ export class ImportService {
    */
   private getFileDatas(fileName: string, advertisers: AdvertiserDto[]): Promise<FileBaseDataDto[]> {
     return new Promise((resolve, reject) => {
-      let fileBaseDatas: FileBaseDataDto[] = [];
+      const fileBaseDatas: FileBaseDataDto[] = [];
       this.connect();
       this.client.on('ready', () => {
         this.client.get(fileName, async (err, stream) => {

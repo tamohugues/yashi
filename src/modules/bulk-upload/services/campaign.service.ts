@@ -24,7 +24,6 @@ export class CampaignService {
       defaults: campaign,
       where: {
         yashiCampaignId: fileBaseDto.campaignId,
-        yashiAdvertiserId: fileBaseDto.advertiserId,
       },
     });
   }
